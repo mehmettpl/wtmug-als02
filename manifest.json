@@ -1,0 +1,55 @@
+{
+  "name": "Cihaz Test PWA",
+  "short_name": "CihazTest",
+  "description": "Android cihaz donanım ve bağlantı özelliklerini test eder.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#050816",
+  "theme_color": "#050816",
+  "lang": "tr",
+  "dir": "ltr",
+  "categories": ["utilities", "developer"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Renk Testi",
+      "short_name": "Renkler",
+      "url": "./index.html?test=colors",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "İnternet Testi",
+      "short_name": "İnternet",
+      "url": "./index.html?test=network",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

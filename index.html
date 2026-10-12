@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050816" />
+  <meta name="description" content="Android cihaz donanım ve bağlantı testleri için PWA" />
+  <title>Cihaz Test PWA</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Arka plan dekoratif katmanlar -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">🧪</div>
+      <div class="brand-text">
+        <h1>Cihaz Test</h1>
+        <p class="sub">Pixel 7 · Android 14 uyumlu</p>
+      </div>
+    </div>
+    <div class="status-chip" id="onlineChip">
+      <span class="dot"></span>
+      <span id="onlineText">Çevrimiçi</span>
+    </div>
+  </header>
+
+  <main id="menu" class="menu">
+    <button class="card" data-test="colors" data-color="#ef4444">
+      <div class="card-glow"></div>
+      <div class="card-icon">🎨</div>
+      <div class="card-info">
+        <span class="card-title">Ekran Renkleri</span>
+        <span class="card-desc">Ana renkleri tam ekranda test et</span>
+      </div>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="card" data-test="touch" data-color="#3b82f6">
+      <div class="card-glow"></div>
+      <div class="card-icon">👆</div>
+      <div class="card-info">
+        <span class="card-title">Dokunmatik</span>
+        <span class="card-desc">Çoklu dokunma ve hassasiyet</span>
+      </div>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="card" data-test="speaker" data-color="#a855f7">
+      <div class="card-glow"></div>
+      <div class="card-icon">🔊</div>
+      <div class="card-info">
+        <span class="card-title">Hoparlör</span>
+        <span class="card-desc">Stereo ve frekans testi</span>
+      </div>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="card" data-test="mic" data-color="#22c55e">
+      <div class="card-glow"></div>
+      <div class="card-icon">🎤</div>
+      <div class="card-info">
+        <span class="card-title">Mikrofon</span>
+        <span class="card-desc">Giriş seviyesi ve izin testi</span>
+      </div>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="card" data-test="vibrate" data-color="#f59e0b">
+      <div class="card-glow"></div>
+      <div class="card-icon">📳</div>
+      <div class="card-info">
+        <span class="card-title">Titreşim</span>
+        <span class="card-desc">Motor ve desen testi</span>
+      </div>
+      <span class="card-arrow">→</span>
+    </button>
+
+    <button class="card" data-test="network" data-color="#06b6d4">
+      <div class="card-glow"></div>
+      <div class="card-icon">🌐</div>
+      <div class="card-info">
+        <span class="card-title">İnternet</span>
+        <span class="card-desc">Hız, ping ve bağlantı tipi</span>
+      </div>
+      <span class="card-arrow">→</span>
+    </button>
+  </main>
+
+  <footer class="app-footer">
+    <span>PWA · <span id="year"></span></span>
+    <span class="version">v2.0</span>
+  </footer>
+
+  <!-- Panel -->
+  <section id="panel" class="panel hidden" aria-hidden="true">
+    <div class="panel-header">
+      <button id="backBtn" class="icon-btn" aria-label="Geri">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h2 id="panelTitle">Test</h2>
+      <div class="panel-spacer"></div>
+    </div>
+    <div id="panelBody" class="panel-body"></div>
+  </section>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
