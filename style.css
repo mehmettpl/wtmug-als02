@@ -26,7 +26,6 @@
   --radius: 18px;
   --radius-sm: 12px;
   --shadow-lg: 0 20px 60px -20px rgba(0, 0, 0, 0.8);
-  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.35);
 }
 
 html, body {
@@ -38,8 +37,12 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   line-height: 1.45;
-  user-select: none;
+  -webkit-user-select: none;
+          user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 body {
@@ -126,11 +129,7 @@ body {
   padding: 20px 20px 8px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.brand { display: flex; align-items: center; gap: 12px; }
 
 .logo {
   width: 48px; height: 48px;
@@ -159,12 +158,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.sub {
-  margin: 2px 0 0;
-  color: var(--text-dim);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-}
+.sub { margin: 2px 0 0; color: var(--text-dim); font-size: 0.78rem; }
 
 .status-chip {
   display: inline-flex;
@@ -236,6 +230,7 @@ body {
   -webkit-backdrop-filter: blur(12px);
   transition: transform 0.18s ease, border-color 0.2s, background 0.2s;
   animation: cardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  touch-action: manipulation;
 }
 
 .card:nth-child(1) { animation-delay: 0.03s; }
@@ -282,7 +277,6 @@ body {
   transform: translateY(-2px);
 }
 .card:hover .card-glow { opacity: 0.35; transform: translate(-30%, -50%) scale(1.15); }
-
 .card:active { transform: scale(0.98); }
 
 .card-icon {
@@ -297,35 +291,11 @@ body {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
-.card-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.card-title {
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: -0.01em;
-}
-
-.card-desc {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
-
-.card-arrow {
-  color: var(--text-mute);
-  font-size: 1.25rem;
-  transition: transform 0.2s, color 0.2s;
-}
-
-.card:hover .card-arrow {
-  color: var(--text);
-  transform: translateX(4px);
-}
+.card-info { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.card-title { font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
+.card-desc { font-size: 0.78rem; color: var(--text-dim); }
+.card-arrow { color: var(--text-mute); font-size: 1.25rem; transition: transform 0.2s, color 0.2s; }
+.card:hover .card-arrow { color: var(--text); transform: translateX(4px); }
 
 /* ============================================================
    FOOTER
@@ -404,6 +374,7 @@ body {
   color: var(--text);
   cursor: pointer;
   transition: background 0.2s, transform 0.15s;
+  touch-action: manipulation;
 }
 .icon-btn:hover { background: rgba(255,255,255,0.1); }
 .icon-btn:active { transform: scale(0.94); }
@@ -413,6 +384,7 @@ body {
   overflow-y: auto;
   padding: 20px;
   animation: fadeUp 0.35s ease both;
+  -webkit-overflow-scrolling: touch;
 }
 
 @keyframes fadeUp {
@@ -443,6 +415,9 @@ body {
   transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
   position: relative;
   overflow: hidden;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+          user-select: none;
 }
 
 .btn::after {
@@ -476,7 +451,9 @@ body {
 }
 .btn.block { display: flex; width: 100%; margin-right: 0; }
 
-/* Renk butonları için */
+/* ============================================================
+   RENK BUTONLARI
+   ============================================================ */
 .color-btns {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -497,6 +474,7 @@ body {
   transition: transform 0.15s, box-shadow 0.2s;
   position: relative;
   overflow: hidden;
+  touch-action: manipulation;
 }
 
 .color-btn::after {
@@ -526,6 +504,7 @@ body {
   animation: colorIn 0.25s ease;
   padding: 20px;
   text-align: center;
+  touch-action: manipulation;
 }
 
 @keyframes colorIn {
@@ -550,49 +529,68 @@ body {
 }
 
 /* ============================================================
-   DOKUNMATİK ALANI
+   DOKUNMATİK ALANI — v3 (kesin çalışan)
    ============================================================ */
 .touch-pad {
   width: 100%;
   height: 55vh;
-  min-height: 300px;
+  min-height: 320px;
   background:
     radial-gradient(circle at center, rgba(99, 102, 241, 0.08), transparent 70%),
     var(--surface);
   border: 2px dashed var(--border-strong);
   border-radius: var(--radius);
+
   position: relative;
   overflow: hidden;
+
   touch-action: none;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+          user-select: none;
+
   margin-top: 12px;
-  display: grid;
-  place-items: center;
+  cursor: crosshair;
 }
 
-.touch-pad::before {
-  content: 'Parmağınızı ekranda gezdirin';
+.touch-pad .placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: var(--text-mute);
   font-size: 0.85rem;
   pointer-events: none;
-  position: absolute;
+  white-space: nowrap;
+  transition: opacity 0.3s;
 }
 
-.touch-pad.has-touch::before { display: none; }
+.touch-pad.has-touch .placeholder {
+  opacity: 0;
+}
 
 .dot {
   position: absolute;
-  width: 70px; height: 70px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.55), rgba(99, 102, 241, 0.15));
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.6), rgba(99, 102, 241, 0.15));
   border: 2px solid #818cf8;
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.7);
+
   transform: translate(-50%, -50%);
+
   pointer-events: none;
-  animation: dotFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+
+  animation: dotFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes dotFade {
   0%   { opacity: 1; transform: translate(-50%, -50%) scale(0.4); }
+  60%  { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
   100% { opacity: 0; transform: translate(-50%, -50%) scale(1.7); }
 }
 
@@ -649,19 +647,8 @@ body {
 }
 
 .stat-row:last-child { border-bottom: none; }
-
-.stat-label {
-  color: var(--text-dim);
-  font-size: 0.88rem;
-}
-
-.stat-value {
-  color: var(--text);
-  font-weight: 600;
-  font-size: 0.92rem;
-  text-align: right;
-  word-break: break-word;
-}
+.stat-label { color: var(--text-dim); font-size: 0.88rem; }
+.stat-value { color: var(--text); font-weight: 600; font-size: 0.92rem; text-align: right; word-break: break-word; }
 
 .status-ok  { color: #4ade80 !important; font-weight: 600; }
 .status-bad { color: #f87171 !important; font-weight: 600; }
@@ -708,6 +695,7 @@ input[type="range"] {
   border-radius: 4px;
   outline: none;
   margin: 14px 0;
+  touch-action: manipulation;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -741,7 +729,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ============================================================
-   SECTION 
+   SECTION BAŞLIK
    ============================================================ */
 .section-title {
   font-size: 0.78rem;
@@ -752,3 +740,43 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 600;
 }
 .section-title:first-child { margin-top: 0; }
+
+/* ============================================================
+   TİTREŞİM GÖRSEL GERİ BİLDİRİM
+   ============================================================ */
+.vibrate-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 80px;
+  margin: 16px 0;
+}
+
+.vibrate-visual .bar {
+  width: 6px;
+  height: 20px;
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+  border-radius: 3px;
+  transition: height 0.15s;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+}
+
+.vibrate-visual.active .bar {
+  animation: vibBar 0.4s ease-in-out infinite;
+}
+
+.vibrate-visual.active .bar:nth-child(1) { animation-delay: 0s; }
+.vibrate-visual.active .bar:nth-child(2) { animation-delay: .05s; }
+.vibrate-visual.active .bar:nth-child(3) { animation-delay: .1s; }
+.vibrate-visual.active .bar:nth-child(4) { animation-delay: .15s; }
+.vibrate-visual.active .bar:nth-child(5) { animation-delay: .2s; }
+.vibrate-visual.active .bar:nth-child(6) { animation-delay: .25s; }
+.vibrate-visual.active .bar:nth-child(7) { animation-delay: .3s; }
+.vibrate-visual.active .bar:nth-child(8) { animation-delay: .35s; }
+.vibrate-visual.active .bar:nth-child(9) { animation-delay: .4s; }
+
+@keyframes vibBar {
+  0%, 100% { height: 20px; opacity: 0.5; }
+  50%      { height: 60px; opacity: 1; }
+}
