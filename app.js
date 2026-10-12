@@ -1,5 +1,5 @@
 // ============================================================
-//  Cihaz Test PWA v2.2 - Touch & Vibrate Fix
+//  Cihaz Test PWA v2.3
 // ============================================================
 
 const menu        = document.getElementById('menu');
@@ -22,11 +22,7 @@ function el(tag, cls, html) {
   if (html !== undefined) e.innerHTML = html;
   return e;
 }
-
-function sectionTitle(text) {
-  return el('div', 'section-title', text);
-}
-
+function sectionTitle(text) { return el('div', 'section-title', text); }
 function statCard(rows) {
   const card = el('div', 'stat-card');
   rows.forEach(r => {
@@ -49,90 +45,7 @@ function toast(msg, ms = 2000) {
   toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms);
 }
 
-// ---------- Titreşim sarmalayıcı ----------
+// ---------- Titreşim ----------
 function safeVibrate(pattern) {
   if (!('vibrate' in navigator)) {
-    toast('❌ Titreşim desteklenmiyor');
-    return false;
-  }
-  try {
-    const ok = navigator.vibrate(pattern);
-    if (!ok) toast('⚠️ Titreşim reddedildi (sessiz mod veya etkileşim yok)');
-    return ok;
-  } catch (e) {
-    toast('Titreşim hatası: ' + e.message);
-    return false;
-  }
-}
-
-// ---------- Online durum ----------
-function updateOnline() {
-  if (navigator.onLine) {
-    onlineChip.classList.remove('offline');
-    onlineText.textContent = 'Çevrimiçi';
-  } else {
-    onlineChip.classList.add('offline');
-    onlineText.textContent = 'Çevrimdışı';
-  }
-}
-window.addEventListener('online', updateOnline);
-window.addEventListener('offline', updateOnline);
-updateOnline();
-
-// ---------- Kartlar için renk değişkeni ----------
-document.querySelectorAll('.card').forEach(card => {
-  const c = card.dataset.color;
-  if (c) card.style.setProperty('--card-color', c);
-});
-
-// ---------- Menü yönlendirme ----------
-menu.addEventListener('click', (e) => {
-  const btn = e.target.closest('.card');
-  if (!btn) return;
-
-  if ('vibrate' in navigator) {
-    try { navigator.vibrate(20); } catch (_) {}
-  }
-
-  openPanel(btn.dataset.test);
-});
-
-backBtn.addEventListener('click', closePanel);
-
-function openPanel(name) {
-  panel.classList.remove('hidden');
-  panel.setAttribute('aria-hidden', 'false');
-  panelBody.innerHTML = '';
-  panelBody.scrollTop = 0;
-  if (cleanupFn) { cleanupFn(); cleanupFn = null; }
-
-  const tests = {
-    colors:  { title: '🎨 Ekran Renkleri', fn: testColors  },
-    touch:   { title: '👆 Dokunmatik',     fn: testTouch   },
-    speaker: { title: '🔊 Hoparlör',       fn: testSpeaker },
-    mic:     { title: '🎤 Mikrofon',       fn: testMic     },
-    vibrate: { title: '📳 Titreşim',       fn: testVibrate },
-    network: { title: '🌐 İnternet',       fn: testNetwork },
-  };
-  const t = tests[name];
-  if (!t) return;
-  panelTitle.textContent = t.title;
-  t.fn();
-}
-
-function closePanel() {
-  if (cleanupFn) { cleanupFn(); cleanupFn = null; }
-  panel.classList.add('hidden');
-  panel.setAttribute('aria-hidden', 'true');
-  panelBody.innerHTML = '';
-}
-
-// ============================================================
-//  1) RENK TESTİ
-// ============================================================
-function testColors() {
-  const colors = [
-    { name: 'Kırmızı',   hex: '#FF0000', text: '#fff' },
-    { name: 'Yeşil',     hex: '#00FF00', text: '#000' },
-    { name: 'Mavi',      hex: '#0000FF', text: '#fff' },
-    { name: 'Beyaz',     hex: '#FFFFFF', text: '#000' },
+    toast('❌ Titreşim desteklenmi
